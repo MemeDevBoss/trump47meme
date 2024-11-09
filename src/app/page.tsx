@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react'
-import { Twitter, Send, ChevronDown } from 'lucide-react'
+import { Twitter, Send, ChevronDown, DollarSign, BarChart2 } from 'lucide-react'
 
 interface SectionProps {
   id: string
@@ -35,46 +35,6 @@ const SocialButton: React.FC<{
     {children}
   </a>
 )
-
-const CountdownTimer: React.FC = () => {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  })
-
-  useEffect(() => {
-    const targetDate = new Date('2024-11-09T16:00:00Z')
-
-    const updateCountdown = () => {
-      const now = new Date()
-      const difference = targetDate.getTime() - now.getTime()
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        })
-      } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
-      }
-    }
-
-    updateCountdown()
-    const timer = setInterval(updateCountdown, 1000)
-
-    return () => clearInterval(timer)
-  }, [])
-
-  return (
-    <div className="text-2xl font-bold mt-4 animate-fade-in text-yellow-300">
-      {timeLeft.days}D {timeLeft.hours}H {timeLeft.minutes}M {timeLeft.seconds}s
-    </div>
-  )
-}
 
 export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -110,9 +70,23 @@ export default function LandingPage() {
             />
           </div>
           <h2 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in-down">The Movement Begins</h2>
-          <p className="text-xl md:text-2xl mb-8 animate-fade-in">Launching Soon on @memedotcooking</p>
-          <ChevronDown className="animate-bounce w-8 h-8" />
-          <CountdownTimer />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+            <SocialButton
+              href="http://meme.cooking/meme/391" // $Trump47 meme.cooking link
+              icon={<DollarSign className="mr-2 group-hover:animate-pulse" />}
+              className="bg-green-600 hover:bg-green-700 text-white"
+            >
+              Buy $Trump47
+            </SocialButton>
+            <SocialButton
+              href="https://dexscreener.com/near/refv1-5633" //$Trump47 Dex screener link
+              icon={<BarChart2 className="mr-2 group-hover:animate-bounce" />}
+              className="bg-purple-600 hover:bg-purple-700 text-white"
+            >
+              View on Dexscreener
+            </SocialButton>
+          </div>
+          <ChevronDown className="animate-bounce w-8 h-8 mt-8" />
         </section>
 
         <Section id="about" title="About $Trump47" className="bg-blue-900/30 backdrop-blur-md">
